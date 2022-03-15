@@ -26,16 +26,16 @@ module.exports = defineConfig({
                     perMachine: true,
                     allowToChangeInstallationDirectory: true
                 },
-                publish: []
+                publish: ["github"]
                 // publish: [
                 //     {
                 //         provider: "github",
-                //         owner: "IoTKETI",
+                //         owner: "dnjstjr93",
                 //         releaseType: "release",
                 //         channel: "latest",
-                //         url: "https://github.com/IoTKETI/ve-gcsmap.git",
-                //         private: true,
-                //         token: process.env.GH_TOKEN
+                //         repo: "https://github.com/dnjstjr93/time_ticker.git",
+                //         private: false,
+                //         token: process.env.WS_TOKEN
                 //     }
                 // ]
             }
