@@ -1,8 +1,10 @@
 'use strict'
 
-import {app, protocol, BrowserWindow} from 'electron'
+import {app, protocol, BrowserWindow, ipcMain} from 'electron'
 import {createProtocol} from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, {VUEJS3_DEVTOOLS} from 'electron-devtools-installer'
+const {autoUpdater} = require("electron-updater");
+const log = require('electron-log');
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
@@ -11,9 +13,11 @@ protocol.registerSchemesAsPrivileged([
     {scheme: 'app', privileges: {secure: true, standard: true}}
 ])
 
+let win;
+
 async function createWindow() {
     // Create the browser window.
-    const win = new BrowserWindow({
+    win = new BrowserWindow({
         fullscreen: true,
         autoHideMenuBar: true,
         webPreferences: {
@@ -34,6 +38,51 @@ async function createWindow() {
         win.loadURL('app://./index.html')
     }
 }
+
+function sendStatusToWindow(text){
+    win.webContents.send("message", text);
+}
+
+/* Updater ======================================================*/
+autoUpdater.on('checking-for-update', () => {
+    log.info('업데이트 확인 중...');
+    sendStatusToWindow('업데이트 확인 중...');
+});
+autoUpdater.on('update-available', (info) => {
+    log.info('업데이트가 가능합니다.');
+    sendStatusToWindow('업데이트가 가능합니다.');
+});
+autoUpdater.on('update-not-available', (info) => {
+    log.info('현재 최신버전(' + app.getVersion() + ')입니다.');
+    sendStatusToWindow('현재 최신버전(' + app.getVersion() + ')입니다.');
+});
+autoUpdater.on('error', (err) => {
+    log.info('에러가 발생하였습니다. 에러내용 : ' + err);
+    sendStatusToWindow('에러가 발생하였습니다. 에러내용 : ' + err);
+});
+autoUpdater.on('download-progress', (progressObj) => {
+    let log_message = "다운로드 속도: " + progressObj.bytesPerSecond;
+    log_message = log_message + ' - 현재 ' + progressObj.percent + '%';
+    log_message = log_message + ' (' + progressObj.transferred + "/" + progressObj.total + ')';
+    log.info(log_message);
+    sendStatusToWindow(log_message);
+})
+autoUpdater.on('update-downloaded', (info) => {
+    log.info('업데이트 다운로드');
+
+    const option = {
+        type: "question",
+        buttons: ['업데이트', '취소'],
+        defaultId: 0,
+        title: "Time Ticker Updater",
+        message: "업데이트가 있습니다. 프로그램을 업데이트 하시겠습니까?"
+    };
+    let btnIndex = dialog.showMessageBoxSync(win, option);
+
+    if (btnIndex === 0) {
+        autoUpdater.quitAndInstall();
+    }
+});
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
@@ -62,7 +111,9 @@ app.on('ready', async () => {
             console.error('Vue Devtools failed to install:', e.toString())
         }
     }
-    createWindow()
+    createWindow();
+    // autoUpdater.autoDownload = true;
+    autoUpdater.checkForUpdates();
 })
 
 // Exit cleanly on request from parent process in development mode.
