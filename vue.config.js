@@ -26,18 +26,17 @@ module.exports = defineConfig({
                     perMachine: true,
                     allowToChangeInstallationDirectory: true
                 },
-                publish: ["github"]
-                // publish: [
-                //     {
-                //         provider: "github",
-                //         owner: "dnjstjr93",
-                //         releaseType: "release",
-                //         channel: "latest",
-                //         repo: "https://github.com/dnjstjr93/time_ticker.git",
-                //         private: false,
-                //         token: process.env.WS_TOKEN
-                //     }
-                // ]
+                // publish: ["github"]
+                publish: [
+                    {
+                        provider: "github",
+                        owner: "dnjstjr93",
+                        channel: "latest",
+                        protocol: 'https',
+                        releaseType: 'release',
+                        token: process.env.GH_TOKEN
+                    }
+                ]
             }
         }
     }
