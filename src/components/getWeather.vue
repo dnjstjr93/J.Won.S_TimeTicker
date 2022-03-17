@@ -100,6 +100,9 @@ export default {
                 }
             )
         },
+        // TODO: 뉴스 연동
+        // TODO: 스피커 연동 (음성인식까지?)
+        // TODO: 실내 온습도?
     },
     mounted() {
         this.forecast()
