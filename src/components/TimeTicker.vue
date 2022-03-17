@@ -14,7 +14,7 @@ export default {
         return {
             time: '',
             date: '',
-            week: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일']
+            week: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
         }
     },
     methods: {
@@ -29,25 +29,61 @@ export default {
                 zero += '0'
             }
             return (zero + num).slice(-digit)
+        },
+        changeMode() {
+            let hour = parseInt(this.time.split(':')[0],10)
+            // let hour = 10
+            var body = document.querySelector("body");
+            if (hour > 19 || hour < 7) {  // dark
+                body.classList.add("dark");
+            } else {
+                body.classList.remove("dark");
+            }
         }
     },
     mounted() {
         setInterval(this.updateTime, 500)
+        setInterval(this.changeMode, 1000)
     }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
+:root {
+    --background: hsl(0, 0%, 98%);
+    --color: hsl(0, 0%, 13%);
+    --color-2: hsl(0, 0%, 27%);
+    --color-3: hsl(0, 0%, 40%);
+    --border-color: hsl(0, 0%, 88%);
+    --card-background: hsl(0, 0%, 93%);
+    --card-background-hover: hsl(0, 0%, 80%);
+    --card-boxshadow: 0 0 30px 0 hsla(0, 0%, 50%, 0.10);
+    --text-shadow: 0px 3px 3px hsla(0, 0%, 13%, 0.251);
+    --green: hsl(170, 100%, 30%);
+    --green-50: hsl(170, 100%, 30%, 50%);
+}
+
+.dark {
+    --background: hsl(0, 0%, 2%);
+    --color: hsl(0, 0%, 87%);
+    --color-2: hsl(0, 0%, 73%);
+    --color-3: hsl(0, 0%, 60%);
+    --border-color: hsl(0, 0%, 12%);
+    --card-background: hsl(0, 0%, 7%);
+    --card-background-hover: hsl(0, 0%, 20%);
+    --card-boxshadow: 0 0 30px 0 hsla(0, 0%, 0%, 0.10);
+    --text-shadow: 0px 3px 3px hsla(0, 0%, 87%, 0.251);
+}
+
 html, body {
     height: 100%;
     overflow-y: hidden;
 }
 
 body {
-    background: #0f3854;
-    background: radial-gradient(ellipse at center, #0a2e38 0%, #000000 70%);
-    background-size: 100%;
+    background: var(--background);
+    overflow: none
 }
 
 p {
@@ -64,8 +100,7 @@ p {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    color: #daf6ff;
-    text-shadow: 0 0 20px rgba(10, 175, 230, 1), 0 0 20px rgba(10, 175, 230, 0);
+    color: var(--color);
 
     .time {
         letter-spacing: 0.05em;
