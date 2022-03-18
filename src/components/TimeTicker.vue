@@ -97,20 +97,20 @@ p {
     color: #ffffff;
     text-align: center;
     position: absolute;
-    left: 50%;
-    top: 50%;
+    left: 65%;
+    top: 80%;
     transform: translate(-50%, -50%);
     color: var(--color);
 
     .time {
         letter-spacing: 0.05em;
-        font-size: 170px;
+        font-size: 110px;
         padding: 5px 0;
     }
 
     .date {
         letter-spacing: 0.1em;
-        font-size: 90px;
+        font-size: 45px;
     }
 
     .text {

@@ -2,7 +2,7 @@
     <div>
         <div class="location-holder">
             <div class="location-icon icon">
-                <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="25" height="25" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd"
                           d="M30.2083 21.8761C30.2083 18.9984 27.8766 16.6667 25.001 16.6667C22.1234 16.6667 19.7917 18.9984 19.7917 21.8761C19.7917 24.7516 22.1234 27.0833 25.001 27.0833C27.8766 27.0833 30.2083 24.7516 30.2083 21.8761Z"
                           stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
@@ -16,20 +16,20 @@
         <div v-if="weatherData.currently && weatherData.daily" class="content fullheight centerpage" id="content">
             <div class="temperature-holder">
                 <span class="value">{{ Math.round(weatherData.currently.temp) }}°C</span>
-                <font-awesome-icon
-                    class="phrase"
-                    :icon="curIcon"
-                    size="xl"/>
-<!--                <span class="phrase">{{ curPhrase }}</span>-->
-                <span class="phrase2">{{ curDesc }}</span>
-
+                <v-row class="mt-n2">
+                    <font-awesome-icon
+                        class="phrase"
+                        :icon="curIcon"
+                        size="1x"/>
+                    <span class="phrase2">{{ curDesc }}</span>
+                </v-row>
             </div>
             <div class="days">
                 <span class="day" v-for="(day, index) in weatherData.daily" :key="index">
                     <span class="temperature-value">{{ Math.round(day.temp.max) }}°C</span>
                     <span class="temperature-value">{{ Math.round(day.temp.min) }}°C</span>
                     <span class="day-date">{{
-                            new Date(weatherData.daily[index].dt * 1000).toLocaleString("en-US", {
+                            new Date(weatherData.daily[index].dt * 1000).toLocaleString("ko", {
                                 day: '2-digit',
                                 year: '2-digit',
                                 month: '2-digit'
@@ -142,8 +142,8 @@ export default {
 
 .location-holder {
     position: absolute;
-    top: 1.5%;
-    left: 1%;
+    top: 2%;
+    left: 2%;
 }
 
 svg {
@@ -164,7 +164,7 @@ svg {
     top: 25%;
     left: 120%;
     width: 600%;
-    font-size: 2rem;
+    font-size: 1rem;
     font-weight: 600;
     font-family: 'Share Tech Mono', monospace;
     color: var(--color);
@@ -178,28 +178,28 @@ svg {
 
 .temperature-holder {
     position: absolute;
-    left: 40%;
+    left: 23%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-    margin: 5px 0;
 }
 
 .value {
-    font-size: 3rem;
+    font-size: 1.5rem;
     font-weight: 600;
     color: var(--color);
     text-shadow: var(--text-shadow);
 }
 
 .phrase {
-    font-size: 3rem;
+    font-size: 1rem;
     font-weight: 600;
     color: var(--color-2);
+    margin-right: 6px;
 }
+
 .phrase2 {
-    font-size: 1.75rem;
+    font-size: 1rem;
     font-weight: 600;
     color: var(--color-2);
 }
@@ -208,7 +208,7 @@ svg {
     position: absolute;
     top: 2%;
     right: 1%;
-    width: 45%;
+    width: 60%;
     background-color: var(--card-background);
     display: flex;
     border-radius: 8px;
@@ -217,7 +217,7 @@ svg {
 
 .day {
     width: calc(100% / 8);
-    height: 100px;
+    height: 55px;
     border: 1px solid var(--border-color);
     display: flex;
     align-items: center;
@@ -236,13 +236,13 @@ svg {
 }
 
 .temperature-value {
-    font-size: 1.5rem;
+    font-size: 0.8rem;
     font-weight: 600;
     color: var(--color);
 }
 
 .day-date {
-    font-size: 1.3rem;
+    font-size: 0.5rem;
     font-weight: 600;
     color: var(--color-2);
 }

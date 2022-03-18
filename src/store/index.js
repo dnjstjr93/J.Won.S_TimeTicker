@@ -74,7 +74,7 @@ export default new Vuex.Store({
             '01d': 'sun',
             '02d': 'cloud-sun',
             '03d': 'cloud',
-            '04d': 'clouds',
+            '04d': 'cloud',
             '09d': 'cloud-drizzle',
             '10d': 'cloud-showers-heavy',
             '11d': 'bolt',
