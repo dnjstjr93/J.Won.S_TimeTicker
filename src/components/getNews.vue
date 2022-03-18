@@ -2,11 +2,12 @@
     <div>
         <div class="news">
             <div class="news_btn"
-                elevation="5"
-                @click="play"
+                 elevation="5"
+                 @click="play"
             >{{ NewsTime }}
             </div>
         </div>
+        <div class="news_log">{{ playLog }}</div>
     </div>
 </template>
 
@@ -19,11 +20,15 @@ export default {
     data() {
         return {
             news: '',
-            NewsTime: ''
+            NewsTime: '',
+
+            audio:null,
+            playStatus: false,
+            playLog: ''
         }
     },
     methods: {
-        getNews() {
+        getNews() { // 주요 뉴스 리스트도 연동?
             var url = "https://imnews.imbc.com/replay/nwradio/"
 
             axios.get(url)
@@ -54,12 +59,18 @@ export default {
         },
         play() {
             if (this.news) {
-                var audio = new Audio(this.news);
-                audio.play();
+                if (!this.playStatus) {
+                    this.audio = new Audio(this.news);
+                    this.audio.play();
+                    this.playStatus = true
+                    this.playLog = '재생 중..'
+                } else {
+                    this.audio.pause();
+                    this.playStatus = false
+                    this.playLog = '중지'
+                }
             }
         }
-        // TODO: 뉴스 연동
-        // TODO: 스피커 연동 (음성인식까지?)
         // TODO: 실내 온습도?
     },
     mounted() {
@@ -114,10 +125,32 @@ export default {
     height: 93%;
     border: 1px solid var(--border-color);
     border-radius: 10%;
+    border-color: var(--color);
+    box-shadow: 0 0 10px var(--color);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+.news_btn:active {
+    width: 100%;
+    height: 93%;
+    border: 1px solid var(--border-color);
+    border-radius: 10%;
+    border-color: var(--color);
+    box-shadow: 0 0 0px var(--color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.news_log {
+    position: absolute;
+    bottom: 10%;
+    left: 2%;
+    width: 80px;
+    color: var(--color);
 }
 
 </style>
