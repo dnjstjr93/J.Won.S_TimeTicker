@@ -31,9 +31,8 @@
                     <span class="day-date">{{
                             new Date(weatherData.daily[index].dt * 1000).toLocaleString("ko", {
                                 day: '2-digit',
-                                year: '2-digit',
                                 month: '2-digit'
-                            })
+                            }).replace('. ', '/').replace('.','')
                         }}</span>
                 </span>
             </div>
@@ -239,7 +238,7 @@ svg {
 }
 
 .day-date {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     font-weight: 600;
     color: var(--color-2);
 }

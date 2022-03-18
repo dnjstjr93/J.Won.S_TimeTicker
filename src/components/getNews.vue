@@ -19,16 +19,52 @@ export default {
     name: 'getNews',
     data() {
         return {
+            MainNewsList: [],
+
             news: '',
             NewsTime: '',
 
-            audio:null,
+            audio: null,
             playStatus: false,
             playLog: ''
         }
     },
     methods: {
-        getNews() { // 주요 뉴스 리스트도 연동?
+        // getMainNews() {
+        //     var url = "https://www.yna.co.kr/sports/all"
+        //
+        //     axios.get(url)
+        //         .then((response) => {
+        //             console.log('response\n', response)
+        //             if (response.status === 200) {
+        //                 const $ = cheerio.load(response.data);
+        //
+        //                 const list_text_inner_arr = $(
+        //                     "#container > section > div > ul > li > div > div"
+        //                 ).toArray();
+        //                 console.log('list_text_inner_arr\n', list_text_inner_arr)
+        //
+        //                 list_text_inner_arr.forEach((li) => {
+        //                     const divThird = $(li).find("div"); // 첫번째 <a> 태그
+        //                     if (divThird['2'].attribs.class === 'tdata r_vod') {
+        //                         const aFirst = $(divThird).find("a").first();
+        //                         const path = aFirst.attr("href");
+        //                         if (path === '#') {
+        //                             this.news = aFirst.attr("data-file");
+        //                             if (divThird['1'].attribs.class === 'tdata r_name') {
+        //                                 this.NewsTime = divThird['1'].children[0].data
+        //                             }
+        //                         }
+        //                     }
+        //                 });
+        //                 console.log(this.NewsTime, '-', this.news)
+        //             }
+        //         }).catch((e) => {
+        //             console.log(e)
+        //         }
+        //     )
+        // },
+        getNews() {
             var url = "https://imnews.imbc.com/replay/nwradio/"
 
             axios.get(url)
@@ -37,20 +73,23 @@ export default {
                         const $ = cheerio.load(response.data);
 
                         const list_text_inner_arr = $(
-                            "#content > section > div > div > div > ul > li > div"
-                            // "#content > section > div > div > ul"
+                            "#content > section > div > div > div > ul > li"
                         ).toArray();
 
-                        list_text_inner_arr.forEach((div) => {
-                            const aFirst = $(div).find("a").first(); // 첫번째 <a> 태그
-                            if (div.attribs.class === 'tdata r_name') {
-                                this.NewsTime = div.children[0].data
-                            }
-                            const path = aFirst.attr("href"); // 첫번째 <a> 태그 url
-                            if (path === '#') {
-                                this.news = aFirst.attr("data-file");
+                        list_text_inner_arr.forEach((li) => {
+                            const divThird = $(li).find("div"); // 첫번째 <a> 태그
+                            if (divThird['2'].attribs.class === 'tdata r_vod') {
+                                const aFirst = $(divThird).find("a").first();
+                                const path = aFirst.attr("href");
+                                if (path === '#') {
+                                    this.news = aFirst.attr("data-file");
+                                    if (divThird['1'].attribs.class === 'tdata r_name') {
+                                        this.NewsTime = divThird['1'].children[0].data
+                                    }
+                                }
                             }
                         });
+                        console.log(this.NewsTime, '-', this.news)
                     }
                 }).catch((e) => {
                     console.log(e)
@@ -73,9 +112,13 @@ export default {
         }
         // TODO: 실내 온습도?
     },
+    created() {
+        // this.getMainNews()
+        this.getNews()
+    },
     mounted() {
-        // setInterval(this.getNews, 30 * 60 * 1000)
-        setInterval(this.getNews, 1000)
+        // setInterval(this.getMainNews, 30 * 60 * 1000)
+        setInterval(this.getNews, 30 * 60 * 1000)
     }
 };
 </script>
@@ -132,6 +175,7 @@ export default {
     justify-content: center;
     flex-direction: column;
 }
+
 .news_btn:active {
     width: 100%;
     height: 93%;
