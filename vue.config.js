@@ -22,7 +22,7 @@ module.exports = defineConfig({
                     ]
                 },
                 linux: {
-                    icon: "./public/JWS_TimeTicker.png",
+                    icon: "./public/JWS_TimeTicker_linux.png",
                     target: [
                         {
                             target: "appimage",
