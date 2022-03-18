@@ -13,11 +13,20 @@ module.exports = defineConfig({
                 appId: 'kr.re.keti.app',
                 productName: "time_ticker",
                 win: {
-                    icon: "./public/logo.png",
+                    icon: "./public/JWS_TimeTicker.png",
                     target: [
                         {
                             target: "nsis",
                             arch: ["x64", "ia32"]
+                        }
+                    ]
+                },
+                linux: {
+                    icon: "./public/JWS_TimeTicker.png",
+                    target: [
+                        {
+                            target: "nsis",
+                            arch: ["armv7l"]
                         }
                     ]
                 },
