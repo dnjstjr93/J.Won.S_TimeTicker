@@ -11,7 +11,7 @@ module.exports = defineConfig({
             builderOptions: {
                 // options placed here will be merged with default configuration and passed to electron-builder
                 appId: 'kr.re.keti.app',
-                productName: "time_ticker",
+                productName: "J.Won.S_TimeTicker",
                 win: {
                     icon: "./public/JWS_TimeTicker.png",
                     target: [
@@ -25,8 +25,8 @@ module.exports = defineConfig({
                     icon: "./public/JWS_TimeTicker.png",
                     target: [
                         {
-                            target: "nsis",
-                            arch: ["armv7l"]
+                            target: "appimage",
+                            arch: ["armv7l", "arm64"]
                         }
                     ]
                 },
