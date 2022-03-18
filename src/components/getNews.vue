@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="news">
-            <div
+            <div class="news_btn"
                 elevation="5"
                 @click="play"
             >{{ NewsTime }}
@@ -98,47 +98,26 @@ export default {
 
 .news {
     position: absolute;
-    top: 15%;
+    top: 20%;
     left: 2%;
-    width: 60px;
-    height: 30px;
+    width: 80px;
+    height: 35px;
     background-color: var(--card-background);
     display: flex;
-    border-radius: 8px;
+    border-radius: 10%;
     box-shadow: var(--card-boxshadow);
     color: var(--color);
 }
 
-.day {
-    width: calc(100% / 8);
-    height: 55px;
+.news_btn {
+    width: 100%;
+    height: 93%;
     border: 1px solid var(--border-color);
+    border-radius: 10%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-}
-
-.day:first-child {
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
-}
-
-.day:last-child {
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
-}
-
-.temperature-value {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--color);
-}
-
-.day-date {
-    font-size: 0.7rem;
-    font-weight: 600;
-    color: var(--color-2);
 }
 
 </style>

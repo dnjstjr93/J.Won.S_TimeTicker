@@ -140,7 +140,7 @@ export default {
 .location-holder {
     position: absolute;
     top: 2%;
-    left: 1%;
+    left: 20%;
 }
 
 svg {
@@ -175,7 +175,7 @@ svg {
 
 .temperature-holder {
     position: absolute;
-    left: 16%;
+    left: 2%;
     display: flex;
     flex-direction: column;
     align-items: center;
