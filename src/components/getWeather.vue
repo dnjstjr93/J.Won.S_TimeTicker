@@ -143,7 +143,7 @@ export default {
 .location-holder {
     position: absolute;
     top: 2%;
-    left: 2%;
+    left: 1%;
 }
 
 svg {
@@ -162,7 +162,7 @@ svg {
 .location {
     position: absolute;
     top: 25%;
-    left: 120%;
+    left: 110%;
     width: 600%;
     font-size: 1rem;
     font-weight: 600;
@@ -178,7 +178,7 @@ svg {
 
 .temperature-holder {
     position: absolute;
-    left: 23%;
+    left: 16%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -242,7 +242,7 @@ svg {
 }
 
 .day-date {
-    font-size: 0.5rem;
+    font-size: 0.7rem;
     font-weight: 600;
     color: var(--color-2);
 }
