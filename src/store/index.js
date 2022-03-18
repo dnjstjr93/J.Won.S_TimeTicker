@@ -7,6 +7,10 @@ export default new Vuex.Store({
     state: {
         API_KEY: '472546e1d0a9a53064c2ae59d4610f13',
         KAKAO_API_KEY: '3db7c3e93b5e3f78fe9d5a8401063af4',
+        NAVER_API: {
+            ClientID: 'YsnLDb6fdCb9maKQncDl',
+            ClientSecret: 'uj8Bg_98DU'
+        },
 
         location: {
             lat: '37.365322375616095',

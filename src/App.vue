@@ -2,18 +2,21 @@
     <div>
         <TimeTicker/>
         <getWeather/>
+        <getNews/>
     </div>
 </template>
 
 <script>
 import TimeTicker from './components/TimeTicker'
 import getWeather from './components/getWeather'
+import getNews from './components/getNews'
 
 export default {
     name: 'App',
     components: {
         TimeTicker,
-        getWeather
+        getWeather,
+        getNews
     }
 }
 </script>

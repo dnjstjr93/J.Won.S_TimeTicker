@@ -16,13 +16,13 @@
         <div v-if="weatherData.currently && weatherData.daily" class="content fullheight centerpage" id="content">
             <div class="temperature-holder">
                 <span class="value">{{ Math.round(weatherData.currently.temp) }}°C</span>
-                <v-row class="mt-n2">
+                <div class="mt-n2">
                     <font-awesome-icon
                         class="phrase"
                         :icon="curIcon"
                         size="1x"/>
                     <span class="phrase2">{{ curDesc }}</span>
-                </v-row>
+                </div>
             </div>
             <div class="days">
                 <span class="day" v-for="(day, index) in weatherData.daily" :key="index">
@@ -99,10 +99,7 @@ export default {
                     console.log(e.message)
                 }
             )
-        },
-        // TODO: 뉴스 연동
-        // TODO: 스피커 연동 (음성인식까지?)
-        // TODO: 실내 온습도?
+        }
     },
     mounted() {
         this.forecast()
