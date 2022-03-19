@@ -37,7 +37,7 @@ export default {
     },
     methods: {
         getMainNews() {
-            var url = "http://localhost:8080/api"
+            var url = "/api"
 
             axios.get(url,)
                 .then((response) => {
@@ -62,7 +62,7 @@ export default {
                                 mainnews.href = aFirst.attr('href')
                                 mainnews.MainNewsTitleList = aFirst.text()
                                 mainnews.MainNewsImgList = imgFirst.attr('srcset').split(' ')[0]
-                                if (this.MainNewsList.length < 6) {
+                                if (this.MainNewsList.length < 5) {
                                     this.MainNewsList.push(mainnews)
                                 }
                             }
