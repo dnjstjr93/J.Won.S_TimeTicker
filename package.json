@@ -1,7 +1,9 @@
 {
     "name": "J.Won.S_TimeTicker",
     "version": "1.0.0",
-    "private": true,
+    "license": "MIT",
+    "author": "Wonseok Jung",
+    "description": "Vue.js-based weather, Google News, MBC News linked clock",
     "scripts": {
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
