@@ -1,7 +1,7 @@
 const {defineConfig} = require('@vue/cli-service')
 module.exports = defineConfig({
     transpileDependencies: true,
-    devServer:{
+    devServer: {
         proxy: {
             '/api': {
                 target: 'http://news.google.com/topstories?hl=ko&gl=KR&ceid=KR:ko',
@@ -31,7 +31,8 @@ module.exports = defineConfig({
                             target: "nsis",
                             arch: ["x64", "ia32"]
                         }
-                    ]
+                    ],
+                    publish: ["github"]
                 },
                 linux: {
                     icon: "./public/JWS_TimeTicker_linux.png",
@@ -40,22 +41,24 @@ module.exports = defineConfig({
                             target: "appimage",
                             arch: ["armv7l", "arm64"]
                         }
-                    ]
+                    ],
+                    publish: ["github"]
                 },
                 nsis: {
                     oneClick: false,
                     perMachine: true,
                     allowToChangeInstallationDirectory: true
                 },
-                // publish: ["github"]
                 publish: [
                     {
                         provider: "github",
                         owner: "dnjstjr93",
-                        channel: "latest",
-                        protocol: 'https',
+                        vPrefixedTagName: true,
+                        host: 'github.com',
+                        token: process.env.GH_TOKEN,
+                        private: true,
+                        channel: "Latest",
                         releaseType: 'release',
-                        token: process.env.GH_TOKEN
                     }
                 ]
             }

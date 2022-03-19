@@ -46,6 +46,13 @@ function sendStatusToWindow(text) {
 }
 
 /* Updater ======================================================*/
+autoUpdater.setFeedURL({
+    provider: 'github',
+    repo: 'J.Won.S_TimeTicker',
+    owner: 'dnjstjr93',
+    private: true,
+    token: process.env.GH_TOKEN
+})
 autoUpdater.on('checking-for-update', () => {
     log.info('업데이트 확인 중...');
     sendStatusToWindow('업데이트 확인 중...');
