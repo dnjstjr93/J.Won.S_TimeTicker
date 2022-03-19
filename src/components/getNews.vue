@@ -158,7 +158,6 @@ export default {
     left: 15%;
     height: 46%;
     width: 70%;
-    background-color: var(--card-background);
     display: block;
     border-radius: 8px;
     box-shadow: var(--card-boxshadow);
@@ -169,6 +168,7 @@ export default {
     border: 1px solid var(--border-color);
     display: block;
     align-items: center;
+    background-color: var(--card-background);
     border-radius: 8px;
     justify-content: center;
     flex-direction: column;
