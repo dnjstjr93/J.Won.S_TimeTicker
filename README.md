@@ -1,4 +1,4 @@
-# time_ticker
+# J.Won.S_TimeTicker
 
 ## Project setup
 ```

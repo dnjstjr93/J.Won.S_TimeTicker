@@ -6,7 +6,6 @@ module.exports = defineConfig({
             '/api': {
                 target: 'https://news.google.com/topstories?hl=ko&gl=KR&ceid=KR:ko',
                 changeOrigin: true,
-                pathRewrite: { '^/api': '' },
             },
         }
     },
