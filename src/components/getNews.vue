@@ -1,5 +1,11 @@
 <template>
     <div>
+        <div class="mainNewsList">
+                <span class="mainNews" v-for="(mainnews, index) in MainNewsList" :key="index">
+                    <img class="newsImg" :src="mainnews.MainNewsImgList">
+                    <span class="newsTitle">{{ mainnews.MainNewsTitleList }}</span>
+                </span>
+        </div>
         <div class="news">
             <div class="news_btn"
                  elevation="5"
@@ -30,40 +36,43 @@ export default {
         }
     },
     methods: {
-        // getMainNews() {
-        //     var url = "https://www.yna.co.kr/sports/all"
-        //
-        //     axios.get(url)
-        //         .then((response) => {
-        //             console.log('response\n', response)
-        //             if (response.status === 200) {
-        //                 const $ = cheerio.load(response.data);
-        //
-        //                 const list_text_inner_arr = $(
-        //                     "#container > section > div > ul > li > div > div"
-        //                 ).toArray();
-        //                 console.log('list_text_inner_arr\n', list_text_inner_arr)
-        //
-        //                 list_text_inner_arr.forEach((li) => {
-        //                     const divThird = $(li).find("div"); // 첫번째 <a> 태그
-        //                     if (divThird['2'].attribs.class === 'tdata r_vod') {
-        //                         const aFirst = $(divThird).find("a").first();
-        //                         const path = aFirst.attr("href");
-        //                         if (path === '#') {
-        //                             this.news = aFirst.attr("data-file");
-        //                             if (divThird['1'].attribs.class === 'tdata r_name') {
-        //                                 this.NewsTime = divThird['1'].children[0].data
-        //                             }
-        //                         }
-        //                     }
-        //                 });
-        //                 console.log(this.NewsTime, '-', this.news)
-        //             }
-        //         }).catch((e) => {
-        //             console.log(e)
-        //         }
-        //     )
-        // },
+        getMainNews() {
+            var url = "http://localhost:8080/api"
+
+            axios.get(url,)
+                .then((response) => {
+                    if (response.status === 200) {
+                        const $ = cheerio.load(response.data);
+
+                        const list_news_inner_arr = $(
+                            "#yDmH0d > c-wiz > div > div > div > div > main > c-wiz > div > div > div > div > div"
+                        ).toArray();
+
+                        list_news_inner_arr.forEach((div) => {
+                            const articleFirst = $(div).find("article").first();
+                            const h3First = $(articleFirst).find("h3").first();
+                            const aFirst = $(h3First).find("a").first();
+
+                            const imgaFirst = $(div).find("a").first();
+                            const figureFirst = $(imgaFirst).find("figure").first();
+                            const imgFirst = $(figureFirst).find("img").first();
+
+                            if (aFirst.text() !== '') {
+                                const mainnews = {}
+                                mainnews.href = aFirst.attr('href')
+                                mainnews.MainNewsTitleList = aFirst.text()
+                                mainnews.MainNewsImgList = imgFirst.attr('srcset').split(' ')[0]
+                                if (this.MainNewsList.length < 6) {
+                                    this.MainNewsList.push(mainnews)
+                                }
+                            }
+                        });
+                    }
+                }).catch((e) => {
+                    console.log(e)
+                }
+            )
+        },
         getNews() {
             var url = "https://imnews.imbc.com/replay/nwradio/"
 
@@ -113,11 +122,11 @@ export default {
         // TODO: 실내 온습도?
     },
     created() {
-        // this.getMainNews()
+        this.getMainNews()
         this.getNews()
     },
     mounted() {
-        // setInterval(this.getMainNews, 30 * 60 * 1000)
+        setInterval(this.getMainNews, 30 * 60 * 1000)
         setInterval(this.getNews, 30 * 60 * 1000)
     }
 };
@@ -150,12 +159,47 @@ export default {
     --text-shadow: 0px 3px 3px hsla(0, 0%, 87%, 0.251);
 }
 
+.mainNewsList {
+    position: absolute;
+    top: 16%;
+    left: 15%;
+    height: 46%;
+    width: 70%;
+    background-color: var(--card-background);
+    display: block;
+    border-radius: 8px;
+    box-shadow: var(--card-boxshadow);
+}
+
+.mainNews {
+    height: calc(calc(100% / 5) - 0.8%);
+    border: 1px solid var(--border-color);
+    display: block;
+    align-items: center;
+    border-radius: 8px;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.newsImg {
+    border-radius: 8px;
+    height: 100%;
+}
+
+.newsTitle {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color);
+    margin-left: 10px;
+    vertical-align: top;
+}
+
 .news {
     position: absolute;
-    top: 20%;
-    left: 2%;
-    width: 80px;
-    height: 35px;
+    bottom: 20%;
+    left: 5%;
+    width: 11%;
+    height: 6%;
     background-color: var(--card-background);
     display: flex;
     border-radius: 10%;
@@ -191,8 +235,8 @@ export default {
 
 .news_log {
     position: absolute;
-    bottom: 10%;
-    left: 2%;
+    bottom: 5%;
+    left: 3%;
     width: 80px;
     color: var(--color);
 }
