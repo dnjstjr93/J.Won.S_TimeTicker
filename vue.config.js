@@ -1,6 +1,15 @@
 const {defineConfig} = require('@vue/cli-service')
 module.exports = defineConfig({
     transpileDependencies: true,
+    devServer:{
+        proxy: {
+            '/api': {
+                target: 'https://news.google.com/topstories?hl=ko&gl=KR&ceid=KR:ko',
+                changeOrigin: true,
+                pathRewrite: { '^/api': '' },
+            },
+        }
+    },
     pluginOptions: {
         electronBuilder: {
             // List native deps here if they don't work
