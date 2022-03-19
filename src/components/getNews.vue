@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="mainNewsList">
+        <div class="mainNewsList" v-if="MainNewsList.length !== 0">
                 <span class="mainNews" v-for="(mainnews, index) in MainNewsList" :key="index">
                     <img class="newsImg" :src="mainnews.MainNewsImgList">
                     <span class="newsTitle">{{ mainnews.MainNewsTitleList }}</span>
@@ -20,6 +20,7 @@
 <script>
 import axios from "axios";
 import cheerio from "cheerio";
+const { ipcRenderer } = require("electron");
 
 export default {
     name: 'getNews',
@@ -37,41 +38,33 @@ export default {
     },
     methods: {
         getMainNews() {
-            var url = "/api"
+            let ipcResData = ipcRenderer.sendSync('synchronous-message', 'callGoogleNews') // "pong"이 출력됩니다.
 
-            axios.get(url,)
-                .then((response) => {
-                    if (response.status === 200) {
-                        const $ = cheerio.load(response.data);
+            const $ = cheerio.load(ipcResData);
 
-                        const list_news_inner_arr = $(
-                            "#yDmH0d > c-wiz > div > div > div > div > main > c-wiz > div > div > div > div > div"
-                        ).toArray();
+            const list_news_inner_arr = $(
+                "#yDmH0d > c-wiz > div > div > div > div > main > c-wiz > div > div > div > div > div"
+            ).toArray();
 
-                        list_news_inner_arr.forEach((div) => {
-                            const articleFirst = $(div).find("article").first();
-                            const h3First = $(articleFirst).find("h3").first();
-                            const aFirst = $(h3First).find("a").first();
+            list_news_inner_arr.forEach((div) => {
+                const articleFirst = $(div).find("article").first();
+                const h3First = $(articleFirst).find("h3").first();
+                const aFirst = $(h3First).find("a").first();
 
-                            const imgaFirst = $(div).find("a").first();
-                            const figureFirst = $(imgaFirst).find("figure").first();
-                            const imgFirst = $(figureFirst).find("img").first();
+                const imgaFirst = $(div).find("a").first();
+                const figureFirst = $(imgaFirst).find("figure").first();
+                const imgFirst = $(figureFirst).find("img").first();
 
-                            if (aFirst.text() !== '') {
-                                const mainnews = {}
-                                mainnews.href = aFirst.attr('href')
-                                mainnews.MainNewsTitleList = aFirst.text()
-                                mainnews.MainNewsImgList = imgFirst.attr('srcset').split(' ')[0]
-                                if (this.MainNewsList.length < 5) {
-                                    this.MainNewsList.push(mainnews)
-                                }
-                            }
-                        });
+                if (aFirst.text() !== '') {
+                    const mainnews = {}
+                    mainnews.href = aFirst.attr('href')
+                    mainnews.MainNewsTitleList = aFirst.text()
+                    mainnews.MainNewsImgList = imgFirst.attr('srcset').split(' ')[0]
+                    if (this.MainNewsList.length < 5) {
+                        this.MainNewsList.push(mainnews)
                     }
-                }).catch((e) => {
-                    console.log(e)
                 }
-            )
+            });
         },
         getNews() {
             var url = "https://imnews.imbc.com/replay/nwradio/"

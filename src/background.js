@@ -1,10 +1,12 @@
 'use strict'
 
-import {app, protocol, BrowserWindow, dialog } from 'electron'
+import {app, protocol, BrowserWindow, dialog, ipcMain} from 'electron'
 import {createProtocol} from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, {VUEJS3_DEVTOOLS} from 'electron-devtools-installer'
+
 const {autoUpdater} = require("electron-updater");
 const log = require('electron-log');
+const axios = require('axios');
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
@@ -39,7 +41,7 @@ async function createWindow() {
     }
 }
 
-function sendStatusToWindow(text){
+function sendStatusToWindow(text) {
     win.webContents.send("message", text);
 }
 
@@ -130,3 +132,18 @@ if (isDevelopment) {
         })
     }
 }
+
+ipcMain.on('synchronous-message', (event, arg) => {
+    if (arg === 'callGoogleNews') {
+        var url = "https://news.google.com/topstories?hl=ko&gl=KR&ceid=KR:ko"
+
+        axios.get(url)
+            .then((response) => {
+                if (response.status === 200) {
+                    event.returnValue = response.data
+                }
+            }).catch((e) => {
+                event.returnValue = e
+        })
+    }
+})

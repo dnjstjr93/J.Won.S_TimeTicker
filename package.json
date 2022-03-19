@@ -21,6 +21,7 @@
         "axios": "^0.24.0",
         "cheerio": "^1.0.0-rc.10",
         "core-js": "^3.6.5",
+        "electron": "^13.0.0",
         "electron-builder": "^22.14.13",
         "electron-log": "^4.4.6",
         "electron-updater": "^4.6.5",
@@ -58,6 +59,11 @@
             "parser": "@babel/eslint-parser"
         },
         "rules": {}
+    },
+    "browser": {
+        "fs": false,
+        "path": false,
+        "os": false
     },
     "browserslist": [
         "> 1%",
