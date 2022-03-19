@@ -80,11 +80,12 @@ export default {
 html, body {
     height: 100%;
     overflow-y: hidden;
+    overflow-x: hidden;
 }
 
 body {
     background: var(--background);
-    overflow: none
+    overflow: none;
 }
 
 p {
@@ -114,10 +115,5 @@ p {
         font-size: 45px;
     }
 
-    .text {
-        letter-spacing: 0.1em;
-        font-size: 12px;
-        padding: 20px 0 0;
-    }
 }
 </style>
