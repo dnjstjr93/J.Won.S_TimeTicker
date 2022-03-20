@@ -113,7 +113,6 @@ export default {
                 }
             }
         }
-        // TODO: 실내 온습도?
     },
     created() {
         this.getMainNews()
