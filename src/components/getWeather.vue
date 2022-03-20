@@ -32,8 +32,8 @@
                             new Date(weatherData.daily[index].dt * 1000).toLocaleString("ko", {
                                 day: '2-digit',
                                 month: '2-digit'
-                            }).replace('. ', '/').replace('.','')
-                        }}</span>
+                            }).replace('. ', '/').replace('.', '')
+                        }}{{ week[new Date(weatherData.daily[index].dt * 1000).getDay()] }}</span>
                 </span>
             </div>
         </div>
@@ -58,6 +58,8 @@ export default {
             curIconNum: '',
             curIcon: 'sun',
             curDescKR: '',
+
+            week: [' (일)', ' (월)', ' (화)', ' (수)', ' (목)', ' (금)', ' (토)']
         }
     },
     methods: {
@@ -205,7 +207,7 @@ svg {
     position: absolute;
     top: 2%;
     right: 1%;
-    width: 60%;
+    width: 70%;
     background-color: var(--card-background);
     display: flex;
     border-radius: 8px;
@@ -239,7 +241,7 @@ svg {
 }
 
 .day-date {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     font-weight: 600;
     color: var(--color-2);
 }
