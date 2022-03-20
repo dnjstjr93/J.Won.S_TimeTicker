@@ -58,10 +58,12 @@ export default {
                     const mainnews = {}
                     mainnews.href = aFirst.attr('href')
                     mainnews.MainNewsTitleList = aFirst.text()
-                    if (Object.prototype.hasOwnProperty.call(imgFirst[0].attribs, 'srcset')) {
-                        mainnews.MainNewsImgList = imgFirst.attr('srcset').split(' ')[0]
-                        if (this.MainNewsList.length < 5) {
-                            this.MainNewsList.push(mainnews)
+                    if (Object.prototype.hasOwnProperty.call(imgFirst[0], 'attribs')) {
+                        if (Object.prototype.hasOwnProperty.call(imgFirst[0].attribs, 'srcset')) {
+                            mainnews.MainNewsImgList = imgFirst.attr('srcset').split(' ')[0]
+                            if (this.MainNewsList.length < 5) {
+                                this.MainNewsList.push(mainnews)
+                            }
                         }
                     }
                 }
