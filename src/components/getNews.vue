@@ -8,19 +8,18 @@
         </div>
         <div class="news">
             <div class="news_btn"
-                 elevation="5"
                  @click="play"
             >{{ NewsTime }}
             </div>
         </div>
-        <div class="news_log">{{ playLog }}</div>
     </div>
 </template>
 
 <script>
 import axios from "axios";
 import cheerio from "cheerio";
-const { ipcRenderer } = require("electron");
+
+const {ipcRenderer} = require("electron");
 
 export default {
     name: 'getNews',
@@ -59,9 +58,11 @@ export default {
                     const mainnews = {}
                     mainnews.href = aFirst.attr('href')
                     mainnews.MainNewsTitleList = aFirst.text()
-                    mainnews.MainNewsImgList = imgFirst.attr('srcset').split(' ')[0]
-                    if (this.MainNewsList.length < 5) {
-                        this.MainNewsList.push(mainnews)
+                    if (Object.prototype.hasOwnProperty.call(imgFirst[0].attribs, 'srcset')) {
+                        mainnews.MainNewsImgList = imgFirst.attr('srcset').split(' ')[0]
+                        if (this.MainNewsList.length < 5) {
+                            this.MainNewsList.push(mainnews)
+                        }
                     }
                 }
             });
@@ -104,11 +105,11 @@ export default {
                     this.audio = new Audio(this.news);
                     this.audio.play();
                     this.playStatus = true
-                    this.playLog = '재생 중..'
+                    // this.playLog = '재생 중..'
                 } else {
                     this.audio.pause();
                     this.playStatus = false
-                    this.playLog = '중지'
+                    // this.playLog = '중지'
                 }
             }
         }
@@ -154,8 +155,8 @@ export default {
 
 .mainNewsList {
     position: absolute;
-    top: 16%;
-    left: 15%;
+    top: 17%;
+    left: 5%;
     height: 46%;
     width: 70%;
     display: block;
@@ -189,8 +190,8 @@ export default {
 
 .news {
     position: absolute;
-    bottom: 20%;
-    left: 5%;
+    top: 30%;
+    right: 7%;
     width: 11%;
     height: 6%;
     background-color: var(--card-background);
@@ -226,12 +227,12 @@ export default {
     flex-direction: column;
 }
 
-.news_log {
-    position: absolute;
-    bottom: 5%;
-    left: 3%;
-    width: 80px;
-    color: var(--color);
-}
+/*.news_log {*/
+/*    position: absolute;*/
+/*    bottom: 5%;*/
+/*    left: 3%;*/
+/*    width: 80px;*/
+/*    color: var(--color);*/
+/*}*/
 
 </style>
