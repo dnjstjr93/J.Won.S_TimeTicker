@@ -3,6 +3,7 @@
         <TimeTicker/>
         <getWeather/>
         <getNews/>
+        <setAlarm/>
     </div>
 </template>
 
@@ -10,13 +11,15 @@
 import TimeTicker from './components/TimeTicker'
 import getWeather from './components/getWeather'
 import getNews from './components/getNews'
+import setAlarm from './components/setAlarm'
 
 export default {
     name: 'App',
     components: {
         TimeTicker,
         getWeather,
-        getNews
+        getNews,
+        setAlarm
     }
 }
 </script>

@@ -2,10 +2,21 @@ import Vue from 'vue'
 import App from './App.vue'
 import store from "./store"
 import {library} from '@fortawesome/fontawesome-svg-core'
-import {faSun, faCloudSun, faCloud, faCloudRain, faCloudShowersHeavy, faBolt, faSnowflake, faSmog} from '@fortawesome/free-solid-svg-icons'
+import {
+    faSun,
+    faCloudSun,
+    faCloud,
+    faCloudRain,
+    faCloudShowersHeavy,
+    faBolt,
+    faSnowflake,
+    faSmog,
+    faCaretUp,
+    faCaretDown
+} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
 
-library.add(faSun, faCloudSun, faCloud, faCloudRain, faCloudShowersHeavy, faBolt, faSnowflake, faSmog)
+library.add(faSun, faCloudSun, faCloud, faCloudRain, faCloudShowersHeavy, faBolt, faSnowflake, faSmog, faCaretUp, faCaretDown)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
