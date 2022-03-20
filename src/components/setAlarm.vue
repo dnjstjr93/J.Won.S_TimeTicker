@@ -85,8 +85,8 @@ import moment from 'moment';
 export default {
     data() {
         return {
-            hour: '08',
-            minute: '30',
+            hour: '09',
+            minute: '00',
             meridiem: 'AM',
 
             diff_min: 0,
