@@ -84,7 +84,7 @@ html, body {
 
 body {
     background: var(--background);
-    overflow: none;
+    overflow: hidden;
 }
 
 p {

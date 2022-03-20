@@ -39,7 +39,7 @@ module.exports = defineConfig({
                     target: [
                         {
                             target: "appimage",
-                            arch: ["armv7l", "arm64"]
+                            arch: ["armv7l"]
                         }
                     ],
                     publish: ["github"]
