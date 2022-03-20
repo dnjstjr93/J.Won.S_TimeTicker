@@ -1,6 +1,6 @@
 {
     "name": "J.Won.S_TimeTicker",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "license": "MIT",
     "author": "Wonseok Jung",
     "description": "Vue.js-based weather, Google News, MBC News linked clock",
