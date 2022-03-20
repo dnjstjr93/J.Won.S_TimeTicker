@@ -14,12 +14,11 @@ export default {
         return {
             time: '',
             date: '',
-            week: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
+            week: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일']
         }
     },
     methods: {
         updateTime() {
-            // TODO: 알람 기능 추가
             let cd = new Date();
             this.time = this.zeroPadding(cd.getHours(), 2) + ':' + this.zeroPadding(cd.getMinutes(), 2) + ':' + this.zeroPadding(cd.getSeconds(), 2);
             this.date = this.zeroPadding(cd.getFullYear(), 4) + '-' + this.zeroPadding(cd.getMonth() + 1, 2) + '-' + this.zeroPadding(cd.getDate(), 2) + ' ' + this.week[cd.getDay()];
@@ -32,7 +31,7 @@ export default {
             return (zero + num).slice(-digit)
         },
         changeMode() {
-            let hour = parseInt(this.time.split(':')[0],10)
+            let hour = parseInt(this.time.split(':')[0], 10)
             // let hour = 10
             var body = document.querySelector("body");
             if (hour > 19 || hour < 7) {  // dark
