@@ -144,7 +144,7 @@ export default {
         AlertAlarm() {
             let curTime = new Date()
 
-            let alarmHour = 0
+            let alarmHour = this.hour
             if (this.meridiem === 'PM') {
                 alarmHour = parseInt(this.hour) + 12
             }
@@ -157,13 +157,13 @@ export default {
             if (this.diff_min === 0) {
                 if (!this.playStatus) {
                     this.audio = new Audio(this.alarmAudio);
+                    this.audio.volume = 1
                     this.audio.play();
                     this.audioButton = '알람 끄기'
                 }
             }
         },
         play() {
-            console.log(this.playStatus)
             if (!this.playStatus) {
                 if (this.audio !== null){
                     this.audio.pause();
@@ -173,6 +173,7 @@ export default {
             } else {
                 this.playStatus = false
                 // this.audio = new Audio(this.alarmAudio);
+                // this.audio.volume = 1
                 // this.audio.play();
                 this.audioButton = '알람 끄기'
             }
